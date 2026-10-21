@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Search any place and see the current weather, a 7-day forecast, and an hourly forecast. Switch between metric and imperial units.">
+  <meta name="theme-color" content="#02012c">
+  <title>Weather Now</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="app">
+    <header class="header">
+      <a class="logo" href="./">
+        <img src="./assets/images/logo.svg" alt="Weather Now" width="197" height="40">
+      </a>
+
+      <div class="units" id="units">
+        <button class="units__toggle" type="button" aria-expanded="false" aria-controls="units-menu" aria-haspopup="true">
+          <img class="units__icon" src="./assets/images/icon-units.svg" alt="" width="16" height="16">
+          <span>Units</span>
+          <img class="chevron" src="./assets/images/icon-dropdown.svg" alt="" width="13" height="8">
+        </button>
+
+        <div class="menu units__menu" id="units-menu" hidden>
+          <button class="units__switch" id="units-switch" type="button">Switch to Imperial</button>
+
+          <div class="units__group" role="radiogroup" aria-labelledby="temp-label">
+            <p class="units__label" id="temp-label">Temperature</p>
+            <button class="units__option" type="button" role="radio" data-unit="temperature" data-value="celsius" aria-checked="true">
+              <span>Celsius (°C)</span>
+              <img class="units__check" src="./assets/images/icon-checkmark.svg" alt="">
+            </button>
+            <button class="units__option" type="button" role="radio" data-unit="temperature" data-value="fahrenheit" aria-checked="false">
+              <span>Fahrenheit (°F)</span>
+              <img class="units__check" src="./assets/images/icon-checkmark.svg" alt="" hidden>
+            </button>
+          </div>
+
+          <div class="units__group" role="radiogroup" aria-labelledby="wind-label">
+            <p class="units__label" id="wind-label">Wind Speed</p>
+            <button class="units__option" type="button" role="radio" data-unit="wind" data-value="kmh" aria-checked="true">
+              <span>km/h</span>
+              <img class="units__check" src="./assets/images/icon-checkmark.svg" alt="">
+            </button>
+            <button class="units__option" type="button" role="radio" data-unit="wind" data-value="mph" aria-checked="false">
+              <span>mph</span>
+              <img class="units__check" src="./assets/images/icon-checkmark.svg" alt="" hidden>
+            </button>
+          </div>
+
+          <div class="units__group" role="radiogroup" aria-labelledby="precip-label">
+            <p class="units__label" id="precip-label">Precipitation</p>
+            <button class="units__option" type="button" role="radio" data-unit="precipitation" data-value="mm" aria-checked="true">
+              <span>Millimeters (mm)</span>
+              <img class="units__check" src="./assets/images/icon-checkmark.svg" alt="">
+            </button>
+            <button class="units__option" type="button" role="radio" data-unit="precipitation" data-value="inch" aria-checked="false">
+              <span>Inches (in)</span>
+              <img class="units__check" src="./assets/images/icon-checkmark.svg" alt="" hidden>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <div class="intro" id="intro">
+        <h1 class="title">How’s the sky looking today?</h1>
+
+        <form class="search" id="search-form" role="search">
+          <div class="search__field">
+            <img class="search__icon" src="./assets/images/icon-search.svg" alt="" width="20" height="20">
+            <label class="sr-only" for="search-input">Search for a place</label>
+            <input
+              class="search__input"
+              id="search-input"
+              type="search"
+              placeholder="Search for a place..."
+              autocomplete="off"
+              spellcheck="false"
+              enterkeyhint="search"
+              role="combobox"
+              aria-autocomplete="list"
+              aria-expanded="false"
+              aria-controls="search-panel"
+            >
+            <div class="menu search__panel" id="search-panel" hidden></div>
+          </div>
+          <button class="search__submit" type="submit">Search</button>
+        </form>
+      </div>
+
+      <p class="empty" id="empty-state" hidden>No search result found!</p>
+
+      <section class="error" id="error-state" hidden role="alert">
+        <img src="./assets/images/icon-error.svg" alt="" width="48" height="48">
+        <h2 class="error__title">Something went wrong</h2>
+        <p class="error__text">We couldn’t connect to the server (API error). Please try again in a few moments.</p>
+        <button class="error__retry" id="retry-button" type="button">
+          <img src="./assets/images/icon-retry.svg" alt="" width="16" height="16">
+          Retry
+        </button>
+      </section>
+
+      <div class="dashboard" id="dashboard" hidden>
+        <div class="dashboard__main">
+          <article class="hero" id="hero" aria-live="polite"></article>
+          <section class="metrics" id="metrics" aria-label="Current conditions"></section>
+          <section class="daily" id="daily" aria-label="Daily forecast"></section>
+        </div>
+        <div class="hourly-wrap">
+          <section class="hourly" id="hourly" aria-label="Hourly forecast"></section>
+        </div>
+      </div>
+    </main>
+
+    <p class="sr-only" id="status" aria-live="polite"></p>
+
+    <footer class="attribution">
+      Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank" rel="noopener noreferrer">Frontend Mentor</a>.
+      Coded by <a href="https://www.frontendmentor.io" target="_blank" rel="noopener noreferrer">Saran</a>.
+    </footer>
+  </div>
+
+  <noscript>
+    <p class="noscript">JavaScript is required to search for weather and load the forecast.</p>
+  </noscript>
+
+  <script src="./app.js"></script>
+</body>
+</html>
